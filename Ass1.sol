@@ -8,12 +8,11 @@ contract Ballot {
     uint private quorum = 4;
     uint count=0;
     
-
+    bytes32[] public arr;
 
     struct Voter {
         uint weight; // 计票的权重，也就是票数
         bool voted;  // 若为真，代表该人已投票
-        address delegate; // 被委托人
         uint vote;   // 投票提案的索引
     }
 
@@ -88,6 +87,18 @@ contract Ballot {
         // 如果 `proposal` 超过了数组的范围，则会自动抛出异常，并恢复所有的改动
         proposals[proposal].voteCount += sender.weight;
     }
+    
+    
+    
+    function fab() public view returns(bytes32[]){
+       for (uint p = 0; p < proposals.length; p++){
+            arr.push(proposals[p].name);
+        }
+        return arr;
+    }
+    
+    
+
 
    function winningProposal() public view
             returns (uint winningProposal_)
