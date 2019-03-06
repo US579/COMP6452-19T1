@@ -24,6 +24,8 @@ contract Ballot {
 
     address public chairperson;
 
+
+
     // 这声明了一个状态变量，为每个可能的地址存储一个 `Voter`。
     // 有权利投票的用户map
     mapping(address => Voter) public voters;
