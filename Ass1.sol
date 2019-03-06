@@ -1,14 +1,16 @@
 pragma solidity ^0.4.22;
 
-/// @title 委托投票
-contract Ballot {
+contract MakeChoices {
     // 这里声明了一个新的复合类型用于稍后的变量
     // 它用来表示一个选民
     
-    uint private quorum = 4;
+    uint private quorum;
     uint count=0;
     
     bytes32[] public arr;
+    bytes32[] public arr1;
+    
+    
 
     struct Voter {
         uint weight; // 计票的权重，也就是票数
@@ -31,6 +33,12 @@ contract Ballot {
     // 一个 `Proposal` 结构类型的动态数组
     // 投票提案数组
     Proposal[] public proposals;
+    
+    
+    function getQuorum(uint quorum_){
+        require(msg.sender == chairperson );
+        quorum = quorum_;
+    }
 
     // 为 `proposalNames` 中的每个提案，创建一个提案对象
     // 合约的构造函数，用constructor标识
@@ -71,7 +79,7 @@ contract Ballot {
         voters[voter].weight = 1;
     }
 
-    
+
 
     /// 把你的票(包括委托给你的票)，
     /// 投给提案 `proposals[proposal].name`.
@@ -90,15 +98,29 @@ contract Ballot {
     
     
     
-    function fab() public view returns(bytes32[]){
+    function list_all_choices() public view 
+        returns(bytes32[]){
        for (uint p = 0; p < proposals.length; p++){
             arr.push(proposals[p].name);
         }
         return arr;
     }
     
-    
 
+    
+    function getResult() public view 
+        returns(bytes32 name,uint voteCount){
+       for (uint p = 0; p < proposals.length; p++){
+             //arr1.push(proposals[p].name);
+             return  (proposals[p].name,proposals[p].voteCount);
+        }
+       
+    }
+    
+    function kill() public {
+        require(msg.sender == chairperson);
+        selfdestruct(msg.sender);
+    }
 
    function winningProposal() public view
             returns (uint winningProposal_)
