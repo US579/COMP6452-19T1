@@ -1,6 +1,6 @@
 pragma solidity ^0.4.22;
 
-/// @title Poll Smart Contract 
+/// @title Poll Smart Contract
 contract Poll {
 
     bytes32[] public arr;
@@ -20,7 +20,7 @@ contract Poll {
 
     // the details of choice
     struct Choice {
-        bytes32 name;   // choice name（32bytes）
+        bytes32 name;   // choice name（最长32个字节）
         uint vcount; // the number of vote
     }
 
@@ -51,8 +51,8 @@ contract Poll {
         quorum = quorum_;
     }
 
-    // Give `voter` the right to vote on this poll.
-    // only  `chairperson` can implements this function
+    // 授权 `voter` 对这个（投票）表决进行投票
+    // 只有 `chairperson` 可以调用该函数。
     function giveRightToVote(address voter) public {
         require(msg.sender == creator,"Only creator can add friends to voter." );
         require(!voters[voter].voted,"The voter already voted.");
