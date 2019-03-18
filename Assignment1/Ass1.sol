@@ -105,11 +105,21 @@ contract Poll {
         }
         return (arrVote,list_all_choices());
     }
-
+    
+    
+    function getarry() external view returns (bytes32[] memory name, uint[] memory vcount) {
+        name = new bytes32[](choices.length);
+        vcount = new uint[](choices.length);
+        for(uint i = 0; i<choices.length;i++) {
+            name[i] = choices[i].name;
+            vcount[i] = choices[i].vcount;
+        }
+    }
+    
     //destory contract after poll terminate
     function destory_contract() public {
         require(ended,"Contract only can be destoryed after poll");
         require(msg.sender == creator,"Only cractor can destory the Contract");
         selfdestruct(msg.sender);
     }
-}w
+}
