@@ -1,9 +1,11 @@
 pragma solidity ^0.4.22;
 
-/// @title Poll Smart Contract 
+/// @title Poll Smart Contract
 contract Poll {
 
+    //the array stores all the chonices name which provided the person who call the `list_all_choice` function
     bytes32[] public arr;
+    //the variable represent whether the poll finised
     bool public ended;
     uint public quorum;
     uint[] public arrVote;
@@ -110,4 +112,4 @@ contract Poll {
         require(msg.sender == creator,"Only cractor can destory the Contract");
         selfdestruct(msg.sender);
     }
-}
+}w
