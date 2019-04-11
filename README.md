@@ -14,7 +14,7 @@ the voting smart contract
 
 Mark: 12.5/12.5
 
-##Assignment2
+## Assignment2
 
 ATAM analysis
 
