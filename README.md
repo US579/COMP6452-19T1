@@ -22,11 +22,11 @@ Mark: 11.5/12.5
 
 # Review
 ### week 1
-1 Data privacy
+1.Data privacy
 * no privileged users
 * 在privacy和transparency之间做出了tradeoff
 
-2 Scalability
+2.Scalability
 需要与其他节点同步所以吞吐量较小
 * Latency of data transmission 
 * write latency 应为要同步(propagation)
@@ -43,8 +43,26 @@ Mark: 11.5/12.5
 * the permission management mechanism may itself become a potential single point of failure, not just operationally but also from a business perspective.
 
 举个🌰
-如果用permission-less的话,if banks are required to establish the real-world identity ,跨辖区边界的免许可区块链可以绕过这一点并破坏监管控制。
+如果用permission-less的话,if banks are required to establish the real-world identity,跨辖区边界的免许可区块链可以绕过这一点并破坏监管控制。
 
+
+- zero-knowledge proof 
+In cryptography, zero knowledge proofs let you convince me that you know something, or have done something, without revealing to me what your secret thing was.
+
+* Logging into a website: rather than typing your password into a potentially unsafe website, you can simply send a proof that you “know your password”.
+
+类似于利用私钥加密,然后用私钥加密后的信息来证明,这个人就是自己
+
+下面举了两个🌰
+
+1.supply chain
+将blockchain应用于supply chain的好处
+*  Ensure ownership, right to sell, etc are handled correctly
+*  Reduce financial risk
+2.Money Transfers
+* 交易速度快
+* 手续费少
 
 ### week 2
+
 
