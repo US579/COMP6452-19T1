@@ -78,7 +78,7 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 
 ***Cryptography basics***
 
-1.公钥私钥加密
+***1.公钥私钥加密***
 
 用私钥签名,签名可以authentication(只要公钥能够解密)
 
@@ -100,7 +100,7 @@ Bitcoin
 
 这样可以在检查个别的hash时可以减少计算量,compare to the Hash list 
 
-Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含了很多transcations,而这些transaction用一个Merkle 
+Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含了很多transcations,而这些transaction用一个Merkle,所以每个block中都包含有一个Merkle tree
 
 tree来保证intergrity.
 
