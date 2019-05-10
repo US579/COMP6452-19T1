@@ -22,12 +22,15 @@ Mark: 11.5/12.5
 
 # Review
 ## WEEK 1 Introduction
-1.Data privacy
+
+***1.Data privacy***
 * no privileged users
 * 在privacy和transparency之间做出了tradeoff
 
 ***2.Scalability***
+
 需要与其他节点同步所以吞吐量较小
+
 * Latency of data transmission 
 * write latency 应为要同步(propagation)
 * 每个块里面交易的大小
@@ -120,13 +123,13 @@ Ps: 在 Ethereum’s account/balance model里面every node has access to the ful
 ```
 mempool: 保存transcation的地方
 parents: referenced input transaction
-
 ```
 Orphan : 没有找到父区块的区块。 在比特币协议中，最长的链被认为是绝对的正确。 如果一个块不是最长链的一部分，那么它被称为是“孤块”。
 
 **5.Locktimes**
 
 是用来设定a transaction can contain a parameter declaring it invalid until the block with a certain sequence number has been mined.
+
 
 
 
