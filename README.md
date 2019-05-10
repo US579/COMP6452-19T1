@@ -126,10 +126,46 @@ parents: referenced input transaction
 ```
 Orphan : 没有找到父区块的区块。 在比特币协议中，最长的链被认为是绝对的正确。 如果一个块不是最长链的一部分，那么它被称为是“孤块”。
 
-**5.Locktimes**
+***5.Locktimes***
 
 是用来设定a transaction can contain a parameter declaring it invalid until the block with a certain sequence number has been mined.
 
+***6.Script***
 
+Bitcoin是用script system来进行交易的
+
+locking script: 是对output进行规则制定的,只有满足这些规则才能output
+
+unlocking script : 是对input进行规则制定的,只有满足这些规则才能input(包含了发送方的siginature and public key)
+
+To validate a transaction, the unlocking script and the locking script are combined and executed. If the result is true, the transaction is valid.
+
+这里用stack的方法来解释Script – Stack-based Execution`ppt33`
+
+上面总共做了两次检查:
+
+1.检查公钥是否来自他所声称的那个人
+
+2.检查签名(authentication)
+
+` opcode: used to mark a transaction output as invalid.`
+
+
+Script programs 不能引入外部状态, 但oracle可以(这个在后面会讲到,考试会考oracle pattern)
+
+***7.Mining***
+
+就是找到一个nonce,能够是的candidate计算出来的value等于blockchain设置的那个,然后把这个nonce加到block header里进行全网广播
+
+`Miners are always listening for new transactions and new blocks`
+
+1.miner会监听所有的到达它这个node点的transcation,然后先通过Script中的locking unlocking script 来检查transcation的validity,通过了就放进mempool中,然后在propagate到网络中,使得其它node也能够同步.
+
+2.对于miner来说,新到的block意味着,这轮已经有人比自己先解开puzzle(试出来那个nonce)并进行广播了,这时候就需要将new block中的transcation从自己的mempool中删除(因为这些transcation已经被别人打包且生成块了),然后在重新生成candidate block,计算Merkle,重新mining(计算nonce)
+
+Ps:在每一次生成candidate的开始,有一笔coinbase transcation应该囊括其中,就是incentive,然后再把其他的交易包含进来(这样做的目的就是如果成功的mine到了这个块,奖励也就自动发放给miner了)
+
+
+Once a solution is found, the result is inserted into the block header, and the new block is immediately propagated to the network. 
 
 
