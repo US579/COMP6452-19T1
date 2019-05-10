@@ -73,4 +73,33 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 
 ### week 2 Existing Blockchain Platforms
 
+Cryptography basics
+
+1.公钥私钥加密
+
+用私钥签名,签名可以authentication(只要公钥能够解密)
+
+2.用hash algorithm(MD5,SHA)
+
+Bitcoin
+
+* Total supply: 21 million
+* 在2016年开始的时候,incentive 是 50 BTC (reward for the miner)
+* The reward is halving every 210,000 blocks.
+
+1.Linked list with hash pointer
+
+类似于linked list,后一节点的block里包含有前一节点的hash value,而第一个block叫block 0 (Genesis block)
+
+2.Merkle tree
+
+用Tree的数据结构来存储transcation的hash vlaue
+
+这样可以在检查个别的hash时可以减少计算量,compare to the Hash list 
+
+Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含了很多transcations,而这些transaction用一个Merkle 
+
+tree来保证intergrity.
+
+
 
