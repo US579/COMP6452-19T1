@@ -20,7 +20,7 @@ ATAM analysis
 
 Mark: 11.5/12.5
 
-## Review
+# Review
 ### week 1
 
 在privacy和transparency之间做出了tradeoff
@@ -35,4 +35,9 @@ Scalability
 
 permissioned  blockchain
 有一个authority来充当看门的 
+
+
+
+
+### week 2
 
