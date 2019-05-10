@@ -101,5 +101,16 @@ Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含
 
 tree来保证intergrity.
 
+3.Store unspent transaction outputs (UTXO)
+
+这是一种表示账户余额的方式
+
+现实中一般我们都会用coinbase的形式来表示,就是会显示余额在账户里面
+
+而UTXO是利用账单状态(spent)(unspent)来代表账户中的余额
+
+* The account balance is therefore derived as the sum of unspent transaction outputs 
+
+
 
 
