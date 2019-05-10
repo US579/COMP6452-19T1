@@ -8,11 +8,12 @@
 
 `pip install npm`
 
-## Assignment1
+## Assignment1                    Assignment2
 
-the voting smart contract
+the voting smart contract         ATAM analysis
 
-Mark: 12.5/12.5
+Mark: 12.5/12.5                   Mark: 11.5/12.5
+
 
 ## Assignment2
 
@@ -21,7 +22,8 @@ ATAM analysis
 Mark: 11.5/12.5
 
 # Review
-### week 1 Introduction
+
+### WEEK 1 Introduction
 1.Data privacy
 * no privileged users
 * 在privacy和transparency之间做出了tradeoff
@@ -71,7 +73,7 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 * 交易速度快
 * 手续费少
 
-### week 2 Existing Blockchain Platforms
+### WEEK 2 Existing Blockchain Platforms
 
 Cryptography basics
 
