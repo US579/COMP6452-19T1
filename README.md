@@ -154,6 +154,7 @@ To validate a transaction, the unlocking script and the locking script are combi
 Script programs 不能引入外部状态, 但oracle可以(这个在后面会讲到,考试会考oracle pattern)
 
 ***7.Mining***
+
 `Miners are always listening for new transactions and new blocks`
 
 `core concept : 就是找到一个nonce,能够是的candidate计算出来的value等于blockchain设置的那个,然后把这个nonce加到block header里进行全网广播`
