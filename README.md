@@ -26,7 +26,7 @@ Mark: 11.5/12.5
 * no privileged users
 * 在privacy和transparency之间做出了tradeoff
 
-2.Scalability
+***2.Scalability***
 需要与其他节点同步所以吞吐量较小
 * Latency of data transmission 
 * write latency 应为要同步(propagation)
@@ -35,9 +35,9 @@ Mark: 11.5/12.5
 
 我们有两种
 
-1.permission-less blockchain 
+***1.permission-less blockchain***
 
-2.permissioned  blockchain
+***2.permissioned  blockchain***
 
 有一个authority来充当看门的大爷,不是所有人都可以access,通过大爷确认后才能加入网络
 
@@ -61,25 +61,25 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 
 下面举了两个🌰
 
-1.supply chain
+***1.supply chain***
 
 将blockchain应用于supply chain的好处
 *  Ensure ownership, right to sell, etc are handled correctly
 *  Reduce financial risk
 
-2.Money Transfers
+***2.Money Transfers***
 * 交易速度快
 * 手续费少
 
 ## WEEK 2 Existing Blockchain Platforms
 
-Cryptography basics
+***Cryptography basics***
 
 1.公钥私钥加密
 
 用私钥签名,签名可以authentication(只要公钥能够解密)
 
-2.用hash algorithm(MD5,SHA)
+***2.用hash algorithm(MD5,SHA)***
 
 Bitcoin
 
@@ -87,11 +87,11 @@ Bitcoin
 * 在2016年开始的时候,incentive 是 50 BTC (reward for the miner)
 * The reward is halving every 210,000 blocks.
 
-1.Linked list with hash pointer
+***1.Linked list with hash pointer***
 
 类似于linked list,后一节点的block里包含有前一节点的hash value,而第一个block叫block 0 (Genesis block)
 
-2.Merkle tree
+***2.Merkle tree***
 
 用Tree的数据结构来存储transcation的hash vlaue
 
@@ -101,16 +101,32 @@ Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含
 
 tree来保证intergrity.
 
-3.Store unspent transaction outputs (UTXO)
+***3.Store unspent transaction outputs (UTXO)***
 
 这是一种表示账户余额的方式
 
 现实中一般我们都会用coinbase的形式来表示,就是会显示余额在账户里面
 
+The Bitcoin blockchain platform has exactly two first-class elements: transactions and blocks. 
+
 而UTXO是利用账单状态(spent)(unspent)来代表账户中的余额
 
 * The account balance is therefore derived as the sum of unspent transaction outputs 
 
+Ps: 在 Ethereum’s account/balance model里面every node has access to the full transaction history and thereby knows which account holds how much currency. 所以这里用的不是UTXO (这里account是匿名的)
+
+***4.Orphan***
+
+```
+mempool: 保存transcation的地方
+parents: referenced input transaction
+
+```
+Orphan : 没有找到父区块的区块。 在比特币协议中，最长的链被认为是绝对的正确。 如果一个块不是最长链的一部分，那么它被称为是“孤块”。
+
+**5.Locktimes**
+
+是用来设定a transaction can contain a parameter declaring it invalid until the block with a certain sequence number has been mined.
 
 
 
