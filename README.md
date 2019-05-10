@@ -21,7 +21,7 @@ ATAM analysis
 Mark: 11.5/12.5
 
 # Review
-### week 1
+### week 1 Introduction
 1.Data privacy
 * no privileged users
 * 在privacy和transparency之间做出了tradeoff
@@ -34,16 +34,22 @@ Mark: 11.5/12.5
 * 提交和确认之间的延迟 
 
 我们有两种
+
 1.permission-less blockchain 
 
 2.permissioned  blockchain
+
 有一个authority来充当看门的大爷,不是所有人都可以access,通过大爷确认后才能加入网络
+
 * 这种blockchain 适合于regulated industries
 * The suitability of a permissioned blockchain may also depend on the size of the network.
 * the permission management mechanism may itself become a potential single point of failure, not just operationally but also from a business perspective.
 
 举个🌰
-如果用permission-less的话,if banks are required to establish the real-world identity,跨辖区边界的免许可区块链可以绕过这一点并破坏监管控制。
+
+如果用permission-less的话,if banks are required to establish the real-world 
+
+identity,跨辖区边界的免许可区块链可以绕过这一点并破坏监管控制。
 
 
 - zero-knowledge proof 
@@ -56,13 +62,15 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 下面举了两个🌰
 
 1.supply chain
+
 将blockchain应用于supply chain的好处
 *  Ensure ownership, right to sell, etc are handled correctly
 *  Reduce financial risk
+
 2.Money Transfers
 * 交易速度快
 * 手续费少
 
-### week 2
+### week 2 Existing Blockchain Platforms
 
 
