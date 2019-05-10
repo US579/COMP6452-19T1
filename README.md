@@ -102,7 +102,7 @@ Bitcoin
 
 Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含了很多transcations,而这些transaction用一个Merkle,所以每个block中都包含有一个Merkle tree
 
-tree来保证intergrity.
+`tree来保证intergrity.`
 
 ***3.Store unspent transaction outputs (UTXO)***
 
