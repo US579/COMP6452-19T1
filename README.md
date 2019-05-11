@@ -196,9 +196,26 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 
    Most blocks are under 2KB (Bitcoin: 1 MB)
 
-* GHOST protocol
+* GHOST protocol (Greedy Heaviest Observed Subtree)
 
    The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
+
+* smart contract
+
+	use gas
+
+	Code is deterministic and immutable once deployed
+
+	Can invoke other smart contracts
+
+
+为啥smart contract 是可以信赖的???
+
+1.contract 的部署方式是以data的形式部署的,所以是无法改变的
+
+2.code是deterministic
+
+3.code的运行结果也是需要consensus来验证的,如果不一样会reject
 
 
 
