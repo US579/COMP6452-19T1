@@ -178,6 +178,8 @@ Once a solution is found, the result is inserted into the block header, and the 
 
 2.wait for several blocks (5 blocks by default) to be added after first inclusion of the transaction
 
+ `这种方法叫: X-Confirmation`
+
 Commit only has a probabilistic guarantee(这里是说commit了但不能保证成功,需要等到5个块以后才算交易成功,因为有可能你commit的那个块不是最长链的一部分)
 
 (等待5个块后,这个块才算是confirm了)
@@ -216,6 +218,84 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 2.code是deterministic
 
 3.code的运行结果也是需要consensus来验证的,如果不一样会reject
+
+
+## WEEK 3
+
+### Taxonomy
+
+一种科学的方法来分析不同blockchain之间的区别
+
+***1.中心化***
+
+* 完全中心化
+
+   政府,法院,商业垄断
+
+
+* 部分去中心化
+    
+    找一个看门大爷来给与进入网络的权利
+
+***2.ledger structure***
+
+* list
+
+	Blockchain is a list of blocks under the logical view from a user’s perspecEve
+
+* tree
+	
+	树状结构的blockchain
+
+	   在bitcoin里有些分支会被丢弃,找最长的一个链
+	   
+	   在Ethereum里找叔块最多的一个树结构
+
+
+***3.Consensus Protocol***
+
+1. POW
+
+用穷举的方法试出nonce,使得得到的hash vlaue和blockchain系统设置的要求有相同数目的0
+
+2. POS
+
+在这里资产的拥有量和被选为下一个miner的可能性成正相关,就是说资产越多,越有可能选为下一个miner
+
+3.PracLcal ByzanLne Fault Tolerance (PBFT)
+
+所有的副本组成的集合使用大写字母R表示，使用0到|R|-1的整数表示每一个副本。为了描述方便，通常假设故障节点数为f个，整个服务节点数为|R|=3f+1个，f是有可能失效的副本的最大个数。尽管可以存在多于3f+1个副本，但额外的副本除了降低性能外不能提高可靠性。
+
+
+4. Bitcoin-NG
+
+新的一种共识机制,能够缩短commit时间,同样用POW算法,但是是选出一个leader来进行确认transcation,只要有交易记录进来就放进mircoblock中立即进行广播
+
+
+***4.Taxonomy Dimensions***
+
+1.Gas limit (Ethereum): Limit the complexity of the contained transacEons
+
+#### block size
+
+1. 增大block size会导致Dos
+
+	Flooding system with transacEons such that the block Eme interval is high
+
+2. High block size increase the risk of empty blocks
+
+	A tries to include many transactions and miner B tries to mine empty blocks. While A is processing transactions, B is already working on its proof-of-work, thereby increasing its relative chances to find a new block first. 
+
+	It is economical to mine as many empty blocks as possible
+
+	因为块size太大的话,在认证transcation是否合法上会花费很多时间,而mine空块的话,不需要认证,可以直接进行mining,这样就在时间上占据优势
+
+
+
+
+
+
+
 
 
 
