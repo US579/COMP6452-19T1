@@ -336,3 +336,73 @@ What is Software Architecture?
 - Models: Views and Viewpoints
 - NFP Analysis and Trade-offs
 
+Blockchain as Component, Connector, Configuration
+
+
+**There are two kinds of requirements:**
+
+* 1. Functional Requirements
+
+	what are the inputs and outputs
+
+* 2. Non-Functional Requirements
+
+	Qualities
+
+		“Performance” (latency, throughput, ... )
+
+		“Security” (confidentiality, integrity, availability, privacy, ...)
+
+		"avaiablity"
+
+		"modifiablity" (flexibility)
+
+
+***Non-Functional Properties arise from Architectural Design Choices***
+
+
+1. ATAM: Architecture Trade-off Analysis Method
+
+2. Two ways of storing data on blockchain:
+	* Adding data into transactions
+	* Adding data into contract storage
+
+• Both ways store data through submitting transactions 
+- Contain information of money transfer
+- Together with optional other data
+
+### Oracle
+
+Summary Introducing the state of external systems into the closed blockchain execution environment.
+
+因为blockchain本身只能执行很简单的逻辑操作,要想实现复杂的功能,就得要引进外部系统(external systems)
+
+more detials : book p127
+
+### Asset Management and Control Mechanism
+
+1. Native token of the 1st generation of blockchain
+	
+	* 本地存储加密货币
+	* 用加存储的加密货币data来代表加密货币
+	* 由于存储空间有限,只能存储少量数据
+
+2. Smart contract of the 2nd generation of blockchain
+	* 可以存储高级数据结构
+	* Flexibility for tokenizing a wider variety of assets
+
+### Tokens
+
+tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下的财产,如果你破产了,法院可以强制转换这个ticket的所有者
+
+有两种token standards
+• ERC20 for fungible tokens
+• ERC841 for non-fungible tokens
+
+注意: 有可以取代和不可取代两种
+
+
+
+
+
+
