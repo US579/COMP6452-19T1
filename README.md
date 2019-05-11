@@ -402,7 +402,13 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 注意: 有可以取代和不可取代两种
 
 
+## WEEK 5 Design Process for Applica1ons on
 
 
+**Evalua1on of Suitability**
+
+1. Trusted authority is a single point of failure
+
+在centrilize的authority中,如果他们的服务垮了,那么全部用户都会受到影响,这就是a single point of failure,但是这可以通过data redundancy来解决,就是一个挂了,还有另一个来服务(Technical single points of failure can be mitigated by using redundancy in conventional distributed systems architectures. )
 
 
