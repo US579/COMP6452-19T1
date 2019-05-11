@@ -21,6 +21,10 @@ ATAM analysis
 Mark: 11.5/12.5
 
 # Review
+
+Auther : Wanze Liu
+___
+
 ## WEEK 1 Introduction
 
 ***1.Data privacy***
@@ -409,6 +413,35 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 
 1. Trusted authority is a single point of failure
 
-在centrilize的authority中,如果他们的服务垮了,那么全部用户都会受到影响,这就是a single point of failure,但是这可以通过data redundancy来解决,就是一个挂了,还有另一个来服务(Technical single points of failure can be mitigated by using redundancy in conventional distributed systems architectures. )
+在centrilize的authority中,如果他们的服务垮了,那么全部用户都会受到影响,这就是a single point of failure,但是这可以通过data redundancy来解决,就是一个挂了,还有另一个来服务(Technical single points of failure can be mitigated by using redundancy in conventional distributed systems architectures. ) 然而, 这只针对的是a single point of failure in `system`,如果是在 single points of organizational or business failure 就无解了.
+
+2. Mul1-party Required
+
+3. Trusted Authority Required
+
+4. Is operation centralized?
+
+5. Is Immutability Required?
+	* Immutability of PoW-based blockchain is a long-run `probabilistic` durability
+	* Blockchain using other consensus mechanism can offer stronger and more conventional immutability(例如拜占庭容错)
+
+6. Is High Performance Required?
+	* 高性能不是blockchain的属性,因为他比较慢(⚡️)
+	* 和传统数据库的性能没法比
+	
+	但是....
+
+	* 读取数据很快
+	* 无网络延迟(因为每一个节点本地都包含所有数据)
+
+	* 写就是一个不确定因素了,之前提过,因为区块链的commit是probabilistic的
+	* Network delay of transaction propagation
+	* Consensus process delay
+	* Confirmation blocks on PoW-based blockchain increases write latency
+
+
+
+
+
 
 
