@@ -291,12 +291,48 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 	因为块size太大的话,在认证transcation是否合法上会花费很多时间,而mine空块的话,不需要认证,可以直接进行mining,这样就在时间上占据优势
 
 
+3. Standard block propagaLon/Extreme Thinblock propagaLon
 
 
 
+4. sidechain
+
+侧链协议是指：可以让比特币安全地从比特币主链转移到其他区块链，又可以从其他区块链安全地返回比特币主链的一种协议。
 
 
+* Problem
+
+	1. Main chain can never be 100% sure if a sidechain transaction has been accepted by the
+	network
+
+	2. Neither does sidechain
 
 
+5. Sharding 
 
+Sharding means to divide the state of blockchain into pieces. The participating blockchain nodes only hold data of some shards instead of the complete blockchain data structure. There are two types of sharding, including:
+
+* transaction sharding 
+* state sharding
+
+就是每个node不存储整个state,而是存储一部分transcation信息或者state信息
+
+6. Incenctive
+
+-  Join the network
+-  Validate transacations
+-  Generate blocks
+-  Execute smart contract
+
+
+## WEEK 4 Software Architecture 
+
+### NFPs and design trade-offs
+
+What is Software Architecture?
+
+- Components, Connectors, Configuration
+- Non-Functional Properties (NFPs)
+- Models: Views and Viewpoints
+- NFP Analysis and Trade-offs
 
