@@ -22,7 +22,7 @@ Mark: 11.5/12.5
 
 # Review
 
-Auther : Wanze Liu
+Author : Wanze Liu
 ___
 
 ## WEEK 1 Introduction
@@ -438,6 +438,8 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 	* Network delay of transaction propagation
 	* Consensus process delay
 	* Confirmation blocks on PoW-based blockchain increases write latency
+
+7. Is Transparency Required?
 
 
 
