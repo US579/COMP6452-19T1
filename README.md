@@ -191,12 +191,15 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 
 * Shorter inter-block time: 13-15 seconds (Bitcoin: 10 mins)
 * Smaller blocks
+
    At most 380 transactions in a block (Bitcoin: 1,500 txs/block)
+
    Most blocks are under 2KB (Bitcoin: 1 MB)
 
 * GHOST protocol
+
    The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
-   
+
 
 
 
