@@ -78,13 +78,13 @@ In cryptography, zero knowledge proofs let you convince me that you know somethi
 
 ***Cryptography basics***
 
+### Bitcoin
+
 ***1.公钥私钥加密***
 
 用私钥签名,签名可以authentication(只要公钥能够解密)
 
 ***2.用hash algorithm(MD5,SHA)***
-
-Bitcoin
 
 * Total supply: 21 million
 * 在2016年开始的时候,incentive 是 50 BTC (reward for the miner)
@@ -106,11 +106,11 @@ Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含
 
 ***3.Store unspent transaction outputs (UTXO)***
 
-这是一种表示账户余额的方式
+这是一种表示账户余额的方式 :  the sum of UTXO 
 
-现实中一般我们都会用coinbase的形式来表示,就是会显示余额在账户里面
+现实中一般我们都会用coinbase的形式来表示,就是直接会显示余额在账户里面
 
-The Bitcoin blockchain platform has exactly two first-class elements: transactions and blocks. 
+因为 The Bitcoin blockchain platform has exactly two first-class elements: transactions and blocks. 
 
 而UTXO是利用账单状态(spent)(unspent)来代表账户中的余额
 
@@ -157,7 +157,7 @@ Script programs 不能引入外部状态, 但oracle可以(这个在后面会讲�
 
 `Miners are always listening for new transactions and new blocks`
 
-`core concept : 就是找到一个nonce,能够是的candidate计算出来的value等于blockchain设置的那个,然后把这个nonce加到block header里进行全网广播`
+`core concept : 就是找到一个nonce,能够使得candidate计算出来的value等于blockchain设置的那个,然后把这个nonce加到block header里进行全网广播`
 
 
 1.miner会监听所有的到达它这个node点的transcation,然后先通过Script中的locking unlocking script 来检查transcation的validity,通过了就放进mempool中,然后在propagate到网络中,使得其它node也能够同步.
@@ -168,5 +168,35 @@ Ps:在每一次生成candidate的开始,有一笔coinbase transcation应该囊�
 
 
 Once a solution is found, the result is inserted into the block header, and the new block is immediately propagated to the network. 
+
+
+***8.Nakamoto Consensus***
+
+1.Treat the longest history of blocks as the main chain
+
+(有可能会出现同时解出nonce的情况,然后同时广播,但由于propgate需要时间,不同node之间到达的顺序并不一样,就有可能出现有的长有的短,但只有最长的那个是valid的)
+
+2.wait for several blocks (5 blocks by default) to be added after first inclusion of the transaction
+
+Commit only has a probabilistic guarantee(这里是说commit了但不能保证成功,需要等到5个块以后才算交易成功,因为有可能你commit的那个块不是最长链的一部分)
+
+(等待5个块后,这个块才算是confirm了)
+
+***9.Wallets and Exchanges***
+
+1.wallet 就是保存了私钥在里面
+
+
+### Ethereum
+
+* Shorter inter-block time: 13-15 seconds (Bitcoin: 10 mins)
+* Smaller blocks
+   At most 380 transactions in a block (Bitcoin: 1,500 txs/block)
+   Most blocks are under 2KB (Bitcoin: 1 MB)
+
+* GHOST protocol
+   The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
+   
+
 
 
