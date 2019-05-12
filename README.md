@@ -574,5 +574,98 @@ Amazon Simple Workflow Service (Amazon SWF) 可轻松的用于构建在分布式
 	* 只用付一次transcation cost and address cost 
 	* fun1 有问题可以只重新deploy 第一个contract
 
+## WEEK6 Performance (NF2) 
+
+### latency
+
+不同的结构对latency的影响
+
+1. gas控制结构
+
+   * 降低脚本执行复杂度,latency减小
+
+2. 选择不同的consensus algorithm
+
+   * nakamoto consensus 有孤块出现的可能,虽然被include了,但也有可能被其他链超越
+
+
+3. interblcok time
+* 指的是txn到达miner开始  到  txn is observed in new block之间的时间
+
+4. Predicting Latency
+
+* For a single transaction on public blockchain
+   * latency = 1.5 * interblock time
+* For sequence of n > 1 transactions on public blockchain
+   * latency = 1.5 * interblock time + (n-1) * 2 interblock time
+
+
+
+
+
+Blockchains have high latency and high variability of latency
+* Number of confirmation blocks are a risk-based decision
+需要用x-confirmation(这里是指即使commit了,也不能完全确认,但要等带6个块以后,才确认(因为有可能其他链变成最长的,自己就会discard))
+
+
+
+### Throughput
+
+1. Transactions per block * blocks per second = Transactions per second
+
+## WEEK 7 Dependability and Security (NFPs2)
+
+1. Functionality
+
+2. Security
+* Integrity
+* Confidentiality
+* Non-repudiation
+* Accountability
+* Authenticity
+
+	问题: Blockchain anomaly 是啥
+
+	***double spending***
+
+	你付了一个商家一比特币，然后马上再次签名，并把这一比特币发给另外一个地址。
+	两笔交易都会到达一个待确认交易池。但是只有第一比交易可以得到确认，并且被矿工在下一个区块签名验证。你的第二币交易会被矿工判定无效，进而被从网络中删除。
+	但如果两个矿工同时从待确认池取走了这两笔交易，那么拿到最多确认的交易讲会被记入账本，另一比将会被忽略.
+	聪明的你可能会发现，这个做法对商家来说是不公平的，因为付给商家的交易有可能会被网络忽略或者回滚。这就是为什么，我们建议商家等待要至少六轮的确认。每轮确认都会有一个新的区块被加入到账本中。也就是说，商家要等待 6个新的区块被加入账本才能确保交易不会被回滚或是被修改，进而确定消费者无法发动双重支付。
+
+3. Reliability
+
+* Reliability
+   * 在特定时间特定情况下,能不能实现特定的功能
+* Availability
+   * 当需要他的时候他在不在
+* Recoverability
+   * 从failure中恢复的能力
+* Maturity
+   * 在正常操作下,其reliability的程度
+* Fault-Tolerance
+   * 在系统出错情况下,其服务不failure
+
+
+How to Abort a Transaction in Ethereum?
+
+* send 0 Ether to yourself, or invoke a smart contract to raise an exception
+* Higher fee means it has different hash value, so will be seen as “different”
+
+
+we propose a mechanism to artificially abort Ethereum transactions by superseding them with an idempotent or counteracting transaction. (幂等或抵消交易,就是用相同的交易内容进行略微的修改,再次交易,是的两个交易发生冲突,回滚或者撤销其中一个,所以并不是能100%成功)
+
+
+## WEEK 8 Architectural Patterns for Blockchain
+
+1. Centralized Oracle(考试重点)
+
+* 一个外部系统可以和区块链这种封闭环境进行交互,Centralized Oracle就是这两个系统交互中间的api
+   * context : 有时候区块链需要和外界交互来验证transcation
+   * problem
+      * blockchain is a self-cotained execution environment(类似于沙盒)
+      * smart contract are pure function that can not access from external system
+
+
 
 
