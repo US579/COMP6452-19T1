@@ -658,13 +658,42 @@ we propose a mechanism to artificially abort Ethereum transactions by supersedin
 
 ## WEEK 8 Architectural Patterns for Blockchain
 
+```
+神马是oracle?? 不是那个甲骨文数据库,这玩意在这里叫 预言机(🐔)
+
+是 An oracle is a trusted third-party that provides smart contracts with information about the external world. 
+
+就是一个能让外界与blockchain交互的类似于APi的东西
+```
 1. Centralized Oracle(考试重点)
 
 * 一个外部系统可以和区块链这种封闭环境进行交互,Centralized Oracle就是这两个系统交互中间的api
-   * context : 有时候区块链需要和外界交互来验证transcation
+   * context : 因为blockchain内部是immutable的once commited,但是有时候区块链需要和外界交互来验证transcation,因为外部状态是随时间而改变的.
+
    * problem
       * blockchain is a self-cotained execution environment(类似于沙盒)
       * smart contract are pure function that can not access from external system
+   * solution
+      * oracle会帮助分析不能在smart contract中expressed的情况
+      * Oracle injects the result to the blockchain in a transaction signed using its own key pair(使用oracle的私钥签名)
+      * Validation of transactions is based on the authentication of the oracle
+
+   * pros
+      * Connectivity : 与外界的联通性(就是说在验证的时候不是封闭环境了,可以在执行逻辑流的时候与外界信息进行交互验证,这可就提高了一个level啊)
+   * cons
+      * Trust: Oracle is trusted by all the participants (orcale 必须被所有的node信任才行)
+      * Validity: External states injected into the transactions can not be fully validated by miners(外部状态的注入并不能被miner完全验证,因为外部状态信息的验证是有orcale来进行的,因为miner信任orcale,所有他也信任从orcale里获取的数据,但这也是一个vulnerablity)
+      * Long-term availability and validity: 虽然说链上的信息是不可变得,但是在orcale里的信息是可变的,如果说信息已经onchain了,oracle里面的又变了,这就煞笔了.....
+
+
+2. Decentralized Oracle 
+	* problem
+	  * A centralized oracle introduces a single trusted third party
+	  * Centralized oracle is a single point of failure
+	  * Variety of data sources
+
+
+
 
 
 
