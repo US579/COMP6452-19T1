@@ -566,11 +566,11 @@ Amazon Simple Workflow Service (Amazon SWF) 可轻松的用于构建在分布式
 
 不同的deploy方式会影响cost
 
-(1). One smart contract with two functions
+1. One smart contract with two functions
 	* needs to pay transcation cost and address cost twice
 	* 任意一个fun出问题,需要全部deploy,维护性差
 
-(2). Two smaller contracts, each implementing one function
+2. Two smaller contracts, each implementing one function
 	* 只用付一次transcation cost and address cost 
 	* fun1 有问题可以只重新deploy 第一个contract
 
