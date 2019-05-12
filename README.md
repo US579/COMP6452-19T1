@@ -112,7 +112,9 @@ Ps : 这两个结构是在一起的,想象linked list的每一个块里面包含
 
 这是一种表示账户余额的方式 :  the sum of UTXO 
 
-现实中一般我们都会用coinbase的形式来表示,就是直接会显示余额在账户里面
+(现实中一般我们都会用coinbase的形式来表示,就是直接会显示余额在账户里面)
+
+但是比特币中所有挖到的块第一笔交易是coinbase的,这是miner根据当前的奖励金额自己加到自己block里面的,只要block成为有效块,奖励就会到miner的账户里(注意,这个时候bitcoin中的总比特币就会增加,而且这比coinbase交易是没有input的只有output,这个output就是unspent transcation✨)
 
 因为 The Bitcoin blockchain platform has exactly two first-class elements: transactions and blocks. 
 
@@ -273,7 +275,7 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 
 4. Bitcoin-NG
 
-新的一种共识机制,能够缩短commit时间,同样用POW算法,但是是选出一个leader来进行确认transcation,只要有交易记录进来就放进mircoblock中立即进行广播
+新的一种共识机制,能够缩短commit时间,同样用POW算法,但是是选出一个leader来进行确认transcation,只要有交易记录进来就放进microblock中立即进行广播
 
 
 ***4.Taxonomy Dimensions***
@@ -386,14 +388,14 @@ more detials : book p127
 ### Asset Management and Control Mechanism
 
 1. Native token of the 1st generation of blockchain
-	
-	* 本地存储加密货币
-	* 用加存储的加密货币data来代表加密货币
-	* 由于存储空间有限,只能存储少量数据
+
+* 本地存储加密货币
+* 用加存储的加密货币data来代表加密货币
+* 由于存储空间有限,只能存储少量数据
 
 2. Smart contract of the 2nd generation of blockchain
-	* 可以存储高级数据结构
-	* Flexibility for tokenizing a wider variety of assets
+* 可以存储高级数据结构
+* Flexibility for tokenizing a wider variety of assets
 
 ### Tokens
 
@@ -422,33 +424,155 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 4. Is operation centralized?
 
 5. Is Immutability Required?
-	* Immutability of PoW-based blockchain is a long-run `probabilistic` durability
-	* Blockchain using other consensus mechanism can offer stronger and more conventional immutability(例如拜占庭容错)
+* Immutability of PoW-based blockchain is a long-run `probabilistic` durability
+* Blockchain using other consensus mechanism can offer stronger and more conventional immutability(例如拜占庭容错)
 
 6. Is High Performance Required?
-	* 高性能不是blockchain的属性,因为他比较慢(⚡️)
-	* 和传统数据库的性能没法比
+* 高性能不是blockchain的属性,因为他比较慢(⚡️)
+* 和传统数据库的性能没法比
 	
 	但是....
 
-	* 读取数据很快
-	* 无网络延迟(因为每一个节点本地都包含所有数据)
+* 读取数据很快
+* 无网络延迟(因为每一个节点本地都包含所有数据)
 
-	* 写就是一个不确定因素了,之前提过,因为区块链的commit是probabilistic的
-	* Network delay of transaction propagation
-	* Consensus process delay
-	* Confirmation blocks on PoW-based blockchain increases write latency
+* 写就是一个不确定因素了,之前提过,因为区块链的commit是probabilistic的
+* Network delay of transaction propagation
+* Consensus process delay
+* Confirmation blocks on PoW-based blockchain increases write latency
 
 7. Is Transparency Required?
-   * Data transparency means data is available and accessible to by other par=es
-   * Blockchain provides a neutral plamorm where all par=cipants can see and audit
-the published data
+* Data transparency means data is available and accessible to by other parties
+* Blockchain provides a neutral plamorm where all participants can see and audit
+
+8. Three cases
+* Supply Chain
+* Electronic Health Records
+   *  blockchain can not used to store patient records, even in encrypted form
+
+  问题: 既然不能存患者信息,那health record里面应该存什么?
+
+  不在链上存储患者信息,将patient records存在auxiliary database里面,只在链上存储hash(logs of accesses)或者是E(logs of accesses)
+
+  MedRec stores a pointer to patients’ data in the blockchain and allows patients to choose when and with whom to share their data.
+
+* Identity Management
+
+   * plaintext identity information for users is not normally stored directly on a blockchain. 
+
+* Stock Market 
+   * blockchain technology might not be suitable for this use case until the performance of blockchain can match up with current conventional technologies. (主要是能够实时更新)
+
+
+9. Design Process for Blockchain-based Systems
+
+* Trade-off Analysis
+   * Encrypting data before storing it on a blockchain
+      * 提高confidentiality,降低performance
+   * Storing only a hash of data on-chain and keeping the contents off-chain
+      * 提高confidentiality and performance
+      * undermine the benefit of blockchains in providing distributed turst
+      * single point of failure
+
+   * Using private blockchain instead of public blockchain
+      * 不是fully 去中心化了
+
+   * Higher number of confirmation blocks
+      * 提高了对交易的可信度
+      * 很高的延迟
 
 
 
+* 存储数据的方式
+   * Raw data off-chain
+   * On-chain just meta-data, small critical data and hashes of the raw data
+
+* Store data in Bitcoin
+   * OP_RETURN (limited to 40 bytes,四种)
+      * writing in a coinbase transaction
+      * using the nSequence field
+      * using a fake account address
+      * using unreachable script code defined through if and else conditions
+
+* Store data in Ethereum
+   * Storing arbitrary data in transaction
+      * Transaction size is limited by the maximum size of a block
+
+   * Storing data in smart contract
+      * As `variable` in a smart contract
+      * As `log event` of smart contract
+      * Variable is more efficient to manipulate, but less flexible due to the constraints of language
 
 
+#### Computation
 
+* Bitcoin only allows simple scripts and conditions
+* Ethereum provides a Turing complete programming language
+* Benefit of on-chain computation
+   * Immutability of the program code once deployed
+   * Neutrality of execu=on environment
+   * Inherent interoperability among the systems built on the same blockchain network
+
+10. Cost
+
+* Storing Data in Smart Contract
+   * 1 sstore operation 花费2000,从 zero 到 non-zero
+   * Every transaction has a fixed cost of 21,000 gas
+   * Data payload costs extra gas(68 per byte,总共32bytes in total)
+
+* Storing data as a log event in a smart contract
+   * 1 log topic costs 375gas
+   * Every byte of data costs an extra 8 gas
+   * Transaction as the carrier costs a base 21,000 gas
+
+* Contract Creation Cost
+C_create = transcation cost(21000) + allocating address cost(32000) +  the function definition cost + payload (in bytes) × C_gas/byte
+
+payload cost : 
+   * 68 gas/non-zero byte
+   * 4 gas/zero byte
+   * 200 gas/contract byte
+
+
+contract里面还可以创建contract,这时候就不需要transcation cost了
+
+11. SWF(Simple Workflow Service) provided by AWS
+
+
+need to know : 什么是SWF?
+
+Amazon Simple Workflow Service (Amazon SWF) 可轻松的用于构建在分布式组件上协同工作的应用程序。在 Amazon SWF 中，一个任务表示的是由您的应用程序组件所执行之工作的一个逻辑单位。跨越应用程序协作任务依据应用逻辑流程涉及有任务间依赖关系的管理、排定和并发性协调。Amazon SWF 可使您完全控制任务的执行和协作，无需担心跟踪任务进度和维持任务状态等底层复杂性。
+
+***Base Cost of Workflow Instance***
+* cost = instance的数量 *  每个instance的单价
+
+***Cost of Scheduling Tasks***
+* cost = (activity tasks的数量 + decision tasks的数量) * 每个task的单价
+
+***Cost of Signals***
+* cost =  signals * 每个signal的单价
+
+***Cost of Data Retention and Transfer***
+* cost_Retention = (user规定的时间 + workflow执行的时间) * 单位价格
+* cost_transfer = payload * 每byte的单价
+
+***Coordina1on Cost***
+
+上面cost的sum
+
+问题: swf 和 blockchain 有啥关系,为什么能比较,week5 ppt86
+
+12. Cost vs. Maintainability
+
+不同的deploy方式会影响cost
+
+(1). One smart contract with two functions
+	* needs to pay transcation cost and address cost twice
+	* 任意一个fun出问题,需要全部deploy,维护性差
+
+(2). Two smaller contracts, each implementing one function
+	* 只用付一次transcation cost and address cost 
+	* fun1 有问题可以只重新deploy 第一个contract
 
 
 
