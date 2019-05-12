@@ -415,7 +415,7 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 
 在centrilize的authority中,如果他们的服务垮了,那么全部用户都会受到影响,这就是a single point of failure,但是这可以通过data redundancy来解决,就是一个挂了,还有另一个来服务(Technical single points of failure can be mitigated by using redundancy in conventional distributed systems architectures. ) 然而, 这只针对的是a single point of failure in `system`,如果是在 single points of organizational or business failure 就无解了.
 
-2. Mul1-party Required
+2. Multi-party Required
 
 3. Trusted Authority Required
 
@@ -440,6 +440,11 @@ tokens 可以看做一个ticket,谁有这个ticket谁就能拥有这个ticket下
 	* Confirmation blocks on PoW-based blockchain increases write latency
 
 7. Is Transparency Required?
+   * Data transparency means data is available and accessible to by other par=es
+   * Blockchain provides a neutral plamorm where all par=cipants can see and audit
+the published data
+
+
 
 
 
