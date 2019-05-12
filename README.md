@@ -731,7 +731,165 @@ we propose a mechanism to artificially abort Ethereum transactions by supersedin
       问题: 这个time到底指的是什么
 
 
+### Data Management (4)
 
+1. Encrypting On-chain Data
+
+Ensure confidentiality of the data stored on blockchain by encrypting it
+* context
+   * Commercially critical data that is only accessible to the involved participants(在商业中不能啥数据都给别人看,需要加密)
+   * Problem
+     * Data privacy is a limitaGon of blockchain(blockchain生来就是透明的)
+
+   * 动机
+     * 只要是在blockchain上的就是谁都能看的,这可不行
+     * 缺少机密性
+   * solution
+     * 给onchain data 加密
+     * 用对称或者不对称秘钥加密
+
+   * pros
+      * 没有key没人能推出raw data
+   * cons
+      * key丢了,就没有办法保证机密性了
+      * Access revocation: 永久可以访问加密信息(blockchain的性质immutable)
+      * Immutable data: Subject to brute force decryption attack(永久都在链上的话,随着科技的发展,可能会有办法解密eg.
+      量子计算机)
+      * Key sharing: 谁有key谁就能看链上的信息
+
+2. Off-chain Data Storage
+
+Using hashing to ensure the integrity of arbitrarily large datasets
+
+* Context
+   * Using blockchain to guarantee the integrity of large amounts of data
+* Problem
+   * Limited storage capacity: 链上不能存储很多信息
+   * Limited size of the block: Storing large amounts of data within a transacGon is impossible
+      * Block gas limit in Ethereum
+   * Data cannot take advantage of immutability or integrity guarantees without being stored on-chain(如果data不上链,那么就没办法发挥blockchian的优势来)
+
+* Solution
+   * Data of big size
+      * Data that is bigger than its hash value
+   * Hash value of the data is stored on blockchain
+
+* pros
+   * Integrity
+      * Blockchain guarantees integrity of the hash value
+      * Hash value guarantees integrity of the raw data
+   * Cost: Fixed low cost for integrity of data with arbitrary size
+* cons
+   * Integrity
+      * Raw data might be changed without authorization(只要存在链下就有被篡改的可能)
+      * Detectable but unrecoverable(虽然能发现,但是不能恢复)
+   * Data loss: Off-chain raw data may be deleted or lost
+
+3. State Channel
+Micro-payments exchanged off-chain and periodically recordingse Elements for larger amounts on chain
+
+问题: state channel是把这些小的交易收集起来然后等到数额够大了交易还是?
+
+* context
+   * Micro-payments are payments that can beas small as a few cents(就是转的钱太少了,不值得放到blockchain上)
+* Problem
+   * Long commit time
+   * high transcation fee
+* sloution
+   * Establish a payment channel between two participants
+   * Deposit from one or both sides locked up(存款从一方或双方锁定)
+   * Payment channel keeps the intermediate states
+   * Only the finalized payment is on chain
+   * Frequency of seElement depends on use cases(就是特殊情况特殊对待)
+* pros
+   * Speed:在线下transcation很快
+   * Throughput:不被区块链的吞吐量限制
+   * Privacy:中间状态不被显示
+   * Cost: 只有最后的commit才会被charge 交易费
+* cons
+   * Trustworthiness:Micro-payment transacGons are not immutable and can be lost aWer the channel is closed
+   * Reduced liquidity: Locked up security deposit reduces liquidity of channel participants(中间小的流水就看不到了)
+
+
+### Security (4)
+
+1. Multiple Authorization
+A set of blockchain addresses which can authorize a transaction is predefined. Only a subset of the addresses is required to authorize transactions.
+
+多人授权: 和银行的差不多,办理业务的时候需要好几个人来授权,这里用pre-define 的 address来授权
+
+* problem
+   * The actual addresses that authorize an acGvity might not be able to be decided due to availability(授权的人可能不在)
+* Solution
+   * The set of blockchain addresses for authorization are not decided before the transaction being submitted to blockchain network
+   * an M-of-N multi-signature can be used to define that M out of N private keys are required to authorize the transaction. 
+* pros
+   * Flexibility: Enable flexible binding of authoriGes based on availability(谁在线谁来授权)
+   * Lost key tolerant.
+      * Threshold-based authorized update(法定人数quorum设置)
+      * One participant can own more than one blockchain address to reduce the risk of losing control over their smart contracts due to a lost private key. 问题: 这是为啥
+
+* cons
+   * Pre-defined authorities: All the possible authorities need to be known in advance(需要知道有哪些人在线,再来选)
+   * Lost key: At least M among N private keys should be safely kept to avoid losing control
+   * 如果使用公共区块链，则更新权限列表需要花费金钱(加密货币)，为多个权限部署逻辑也是如此。与只存储一个地址相比，存储多个地址的成本更高。
+
+验证过程应该是这样,这个transcation把data分别用选中address的公钥加密,然后在commit,通过选中address人的私钥解密来授权
+
+2. Dynamic Authorization
+
+动态授权采用来hash加密的方式,用一个hash(secret)来验证授权,将这个hash vlaue放在deploy的contract里面,然后只要将这个secret给鉴权的人
+,就可以对transcation进行鉴权.
+
+Using a hash created off-chain to dynamically bind authority for a transaction.
+
+* context 
+   * Activities might need to be authorized by multiple blockchain addresses(需要多个address来授权)
+
+
+* problem
+   * 在将第二个事务添加到区块链之前，必须在第一个事务中定义所有能够授权第二个事务的帐户。如果没有定义就无法授权
+   * No dynamic binding with an address of a participant
+
+* Solution
+  * Off-chain secret used to enable dynamic authorization
+  * Transaction is “locked” by hash of an off-chain secret(用hash(a random string, called pre-image)来和链下的hash( random string)进行比较)
+  * Whoever receives the secret off-chain can authorize the transaction(比较match就算验证成功,可以给与权限)
+
+* pros
+   * Dynamism: Enable dynamic binding of unknown authorities
+   * Lost key tolerance: No specific key is required to authorize transacGon
+   * Routability
+   * Interoperability: Enable interacGon between other systems and blockchain
+* cons
+   * One-off secret: Secret is not reusable after being revealed
+   * Lost secret: TransacGon is “locked” forever if the secret is lost
+
+
+3. Factory Contract 
+
+On-chain template contract is used as a factory that generates contract instances from the
+template(就是smart contract的模板)
+
+The template can be stored off-chain in a code repository, or on-chain, within its own smart contract.
+
+* Problem
+   * Off-chain contract template cannot guarantee consistency 模板相同并不能保证从这个相同模板创建的不同smart contract的一致性,因为在线下的时候,代码是可以被修改的
+
+   * Solution
+      *  Smart contract are created from a contract factory on blockchain(存储的是smart contract 的 class)
+      *  Factory contract is deployed once from off-chain source code
+        问题: 这句话啥意思
+      *  Smart contract instances are generated by passing parameters to the contract factory to instanGate customized instances(contract通过class创建实例,传入参数)
+      * 在链上的class内代码是不能被修改的,所以 This contract instance (the object) will maintain its own properties independently of the other instances,but with a structure consistent with its original template(class).
+
+* pros
+   * Security: On-chain factory contract guarantees consistency
+   * Efficiency: Smart contract instances are generated by calling a funcGon
+* cons
+   * Cost on public blockchain(创建实例的时候需要花费gas)
+      * Deployment
+      * FuncGon call for smart contract instance creation On-chain deploy once
 
 
 
