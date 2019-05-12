@@ -691,7 +691,44 @@ we propose a mechanism to artificially abort Ethereum transactions by supersedin
 	  * A centralized oracle introduces a single trusted third party
 	  * Centralized oracle is a single point of failure
 	  * Variety of data sources
+	* solution
+	  * Decentralized oracle based on multiple servers and multiple data sources(多数据源多servers)
+	  * Consensus on the external status(在oracle内部还有共识机制,对他们收集的data进行共识匹配)
+	     * k-out-of-n property. A verifier can only be convinced that a signature was produced by the collaboration of at least k anonymous signers among n signers(就是在一个有n个人的group中如果至少有K个人签名了,这份签名就有效https://eprint.iacr.org/2018/728.pdf)
 
+	* pros
+	   * Risk is reduced from a single point of failure
+	   * Improves the likelihood of gedng accurate external data
+	* cons
+	   * Time: Get required informaGon from mulGple data sources and reach a consensus for the final result
+(time-consuming)
+	   * Cost: increase with the number of oracles being used(多个server花费越多)
+	   * Trust: All the oracles that verify the external state are trusted by all participants involved in transactions
+	   问题: 都信任了为啥是drawback
+
+3. Voting
+* Voting is a method for a group of blockchain users of a decentralized oracle to make a collective decision or to achieve a consensus
+   * Context
+      * Public access of blockchain provides equal rights
+      * Participant has the same ability to access and manipulate the blockchain
+   *  Problem
+      * Participants have different preference
+   * 要voting的动机
+      * Decentralization
+      * Consensus
+   * solution
+      * Vote through sending transacGon through blockchain account
+      * Voting transaction is signed by the private key
+         * Represent the right to make decision(transcation就代表了投票)
+         * Might be weighted by the owned resource(会根据每个人拥有的资源不同设置不同的投票比重)
+   * pros
+      * Equality: ParGcipants use their right to make decision
+      * consensus: partcitipant with different opinions can reach consensus
+   * cons
+      * Collusion: (有人会一起合谋来获取利益)
+      * Permission grant:匿名的设置可以让一个人注册多个账户,然后就拥有了更多的投票权
+      * Time: Long voting/dispute time window(这个应该是如果有争议会很耗时)
+      问题: 这个time到底指的是什么
 
 
 
