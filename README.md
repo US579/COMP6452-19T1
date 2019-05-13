@@ -892,4 +892,45 @@ The template can be stored off-chain in a code repository, or on-chain, within i
       * FuncGon call for smart contract instance creation On-chain deploy once
 
 
+## WEEK 9 Model-Driven Engineering
+
+1. modelling levels
+
+* Low-level models: production code can be directly derived from the models(直接用模型的code)
+* High-level models: means of communication between business owners and developers implementing a system(需要通过双方的交流来生成production)
+* Intermediate levels can support model-based system analysis or system management tools
+
+
+2. MDE vs. MDD vs. MDA
+
+* Model-driven development (MDD) vs. MDE:
+   * MDD适合于软件开发 
+   * MDE是code generation
+
+
+`UML (Unified Modeling Language) is a standard language for specifying, visualizing, constructing, and documenting the artifacts of software systems. `
+
+* Model-driven architecture (MDA) vs. MDD/MDE:
+   * standred using UML
+   * Does not cover all aspects of an architecture, but architecture-centric models
+   * 就是以模型为导向的各种架构
+
+
+
+3. Advantages of MDE in the blockchain context
+
+* Code generation can implement best practices and well-tested building blocks(code可以写在blockcahin内部)
+* Improved productivity, especially for novices in a particular technology(code都写在里面了,就相当于模板,新手能够直接调用)
+* Models can be independent of specific blockchain technologies or platforms(model可以不依赖于blockchain技术和平台)
+* Models are often easier to understand than code
+
+4. Fungible and Non-fungible Tokens
+* 详细解说: https://www.unitimes.io/auther/11747/?lang=zh
+* 简单来说,可替代tokens就是没有自己独一无二的特性,所以的这类token都一样,就像钱,你给别人你的100,别人在还给你另外一张100,没有任何区别,而且可替代tokens还是可分的,比如你花掉100中的10,但是,不可替换token,每一个token都有自己独一无二的特征,世界上只有这一个token,且其不可分.
+
+5. Lorikeet
+* 一个tool,模板,可以直接生产 contract,类似于事先定义的class,然后实例化一个,方便简洁
+
+Translator
+* Translate subset of BPMN elements to Solidity(就是把BPMN的流程转化为code)
 
