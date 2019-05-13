@@ -206,15 +206,17 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
 
 * GHOST protocol (Greedy Heaviest Observed Subtree)
 
-   The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
+   * The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
+   * https://segmentfault.com/a/1190000017411084
+   ![image text]https://github.com/US579/COMP6452-19T1/image/uncle)
 
 * smart contract
 
-	use gas
+	* use gas
 
-	Code is deterministic and immutable once deployed
+	* Code is deterministic and immutable once deployed
 
-	Can invoke other smart contracts
+	* Can invoke other smart contracts
 
 
 为啥smart contract 是可以信赖的???
@@ -933,4 +935,19 @@ The template can be stored off-chain in a code repository, or on-chain, within i
 
 Translator
 * Translate subset of BPMN elements to Solidity(就是把BPMN的流程转化为code)
+
+
+
+# Summary
+
+
+* A blockchain is a distributed ledger that is struc- tured into a linked list of blocks.
+
+* A (distributed ledger)分布式账本 is an append-only store of transactions which is distributed across many machines.(注意这里是append-only)
+
+
+
+
+
+
 
