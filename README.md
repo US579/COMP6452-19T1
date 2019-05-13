@@ -209,7 +209,7 @@ Commit only has a probabilistic guarantee(这里是说commit了但不能保证�
    * The heaviest chain wins and uncles contribute to the weight(孤块在这里是叔块,且最重的链为有效链)
    * https://segmentfault.com/a/1190000017411084
 
-![image text]https://github.com/US579/COMP6452-19T1/tree/master/image/uncle.png)
+![image text](https://github.com/US579/COMP6452-19T1/tree/master/image/uncle.png)
 
 * smart contract
 
